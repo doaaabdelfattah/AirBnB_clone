@@ -1,1 +1,2 @@
-# AirBnB_clone not empty
+
+Welcome to the AirBnB clone project!
