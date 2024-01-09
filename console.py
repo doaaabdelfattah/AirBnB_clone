@@ -33,8 +33,7 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    my_cli = HBNBCommand()
-    my_cli.cmdloop()
+    HBNBCommand().cmdloop()
     
     
 
