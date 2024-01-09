@@ -28,12 +28,15 @@ class HBNBCommand(cmd.Cmd):
         Eliminates empty lines
         """
         pass
+    
+    def do_hello(self, line):
+        print("Hello, World")
 
 
 
 
-if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+# if __name__ == '__main__':
+#     HBNBCommand().cmdloop()
     
     
 
