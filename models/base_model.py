@@ -5,6 +5,7 @@ Custom BaseModel class for the AirBnb project
 
 from uuid import uuid4
 from datetime import datetime
+import models
 
 class BaseModel:
     """Custom base for all the classes in the AirBnb console project
@@ -37,6 +38,8 @@ class BaseModel:
                 else:        
                     # add items to dict
                     self.__dict__[key] = value
+        else:
+            models.storage.new(self)
 
 
     def __str__(self):
@@ -46,6 +49,7 @@ class BaseModel:
     def save(self):
         """update the updated_at to current time"""
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """Returns a dictionary representation"""
