@@ -39,7 +39,6 @@ class HBNBCommand(cmd.Cmd):
 #     HBNBCommand().cmdloop()
     
     
-
 # Make the interpreter works in a loop
 if __name__ == "__main__":
     # not Running in Terminal (non-interactive)
