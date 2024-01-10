@@ -3,27 +3,46 @@
 Custom class for cli program
 """
 import cmd
+import shlex
 import sys
 from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
-    __classes = {"BaseModel", "User", "State", "City", "Place", "Amenity", "Review"}
+    __classes = {
+        "BaseModel",
+        "User",
+        "Place",
+        "State",
+        "City",
+        "Amenity",
+        "Review"
+    }
     '''The preloop method 
     is called once before the command loop starts.
     '''
     def preloop(self) -> None:
         print("Documented commands (type help <topic>):")
         print("========================================")
+        
+        def do_help(self, line):
+            """overrides help method"""
+        cmd.Cmd.do_help(self, line)
+        
+    def help_quit(self):
+        """ help guide for quit command """
+        print('Quit command to exit the program')
+
+    def help_EOF(self):
+        """ help guide for EOF command """
+        print('EOF command to exit the program')
+
     
     def do_EOF(self, line):
-        """Quits command interpreter with ctrl+d
-         Args:
-            line(args): input argument for quiting
-            the terminal
-
-        """
+        """ function to exit the cmd """
+        print()
         return True
+
     def do_quit(self, line):
         """Quit command to exit the program
          Args:
@@ -34,7 +53,7 @@ class HBNBCommand(cmd.Cmd):
         return True
     
     # Aliasing (make exit the same as quit)
-    do_exit = do_quit
+    #do_exit = do_quit
     
     def do_empty_line(self, line):
         """ Eliminates empty lines
@@ -60,7 +79,6 @@ class HBNBCommand(cmd.Cmd):
                 # print its id
                 print(f"{new_obj.id}")
                 
-
 ''' to handel multiable command
 sys.argv list, which contains 
 all the command-line arguments.
