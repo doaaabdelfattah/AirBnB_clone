@@ -4,9 +4,11 @@ Custom class for cli program
 """
 import cmd
 import sys
+from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
+    __classes = {"BaseModel", "User", "State", "City", "Place", "Amenity", "Review"}
     '''The preloop method 
     is called once before the command loop starts.
     '''
@@ -30,16 +32,34 @@ class HBNBCommand(cmd.Cmd):
 
         """
         return True
+    
+    # Aliasing (make exit the same as quit)
+    do_exit = do_quit
+    
     def do_empty_line(self, line):
-        """
-        Eliminates empty lines
+        """ Eliminates empty lines
         """
         pass
     
-    def do_hello(self, line):
-        print("Hello, World")
-
-
+    def do_create(self, arg):
+        ''' Usage: create <class>
+        Creates a class instance,saves it (to the JSON file) 
+        and prints its id '''
+        # Split the arguments to a list
+        args = arg.split()
+        if not arg:
+            print("** class name missing **")
+        else:
+            if args[0] not in HBNBCommand.__classes:
+                print("** class doesn't exist **")
+            else:
+                # create new object
+                new_obj = eval(args[0])()
+                # save new object to json file
+                new_obj.save()
+                # print its id
+                print(f"{new_obj.id}")
+                
 
 ''' to handel multiable command
 sys.argv list, which contains 
