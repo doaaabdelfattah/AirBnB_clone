@@ -44,7 +44,7 @@ class FileStorage:
        '''
        try:
            with open(FileStorage.__file_path, 'r') as f:
-                Current_dict = json.loads(f.read())
+                Current_dict = json.load(f)
             # loop through all objects in Current_dict
                 for value in Current_dict.values():
                     # extract the class name from object keys as string
