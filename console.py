@@ -5,6 +5,7 @@ Custom class for cli program
 import cmd
 import sys
 from models.base_model import BaseModel
+import models
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
@@ -56,10 +57,27 @@ class HBNBCommand(cmd.Cmd):
                 # create new object
                 new_obj = eval(args[0])()
                 # save new object to json file
-                new_obj.save()
+                models.storage.save()
                 # print its id
                 print(f"{new_obj.id}")
-                
+    
+    def do_all(self, arg):
+        '''Usage: all <classname> or all'''
+        args = arg.split()
+        obj_list = []
+        if args:
+            if args[0] not in HBNBCommand.__classes:
+                    print("** class doesn't exist **")
+            else:
+                for value in models.storage.all().values():
+                    if args[0] == value.__class__.__name__:
+                        obj_list.append(value.__str__())
+        else:
+            for value in models.storage.all().values():
+                obj_list.append(value.__str__())
+        print(obj_list)
+
+
 
 ''' to handel multiable command
 sys.argv list, which contains 
