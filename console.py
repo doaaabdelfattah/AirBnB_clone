@@ -17,8 +17,6 @@ class HBNBCommand(cmd.Cmd):
     def preloop(self) -> None:
         print("Documented commands (type help <topic>):")
         print("========================================")
-<<<<<<< HEAD
-=======
         
     def do_help(self, line):
         """overrides help method"""
@@ -32,7 +30,6 @@ class HBNBCommand(cmd.Cmd):
         """ help guide for EOF command """
         print('EOF command to exit the program')
 
->>>>>>> 837f13b186df69f46165fd4df798315072d1ef58
     
     def do_EOF(self, line):
         """Quits command interpreter with ctrl+d
