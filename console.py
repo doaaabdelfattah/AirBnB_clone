@@ -26,8 +26,8 @@ class HBNBCommand(cmd.Cmd):
         print("Documented commands (type help <topic>):")
         print("========================================")
         
-        def do_help(self, line):
-            """overrides help method"""
+    def do_help(self, line):
+        """overrides help method"""
         cmd.Cmd.do_help(self, line)
         
     def help_quit(self):
@@ -80,6 +80,23 @@ class HBNBCommand(cmd.Cmd):
                 # print its id
                 print(f"{new_obj.id}")
                 
+                
+    def do_all(self, arg):
+        '''Usage: all <classname> or all '''
+        args = arg.split()
+        obj_list = []
+        if args:
+            if args[0] not in HBNBCommand.__classes:
+                    print("** class doesn't exist **")
+            else:
+                for value in models.storage.all().values():
+                    if args[0] == value.__class__.__name__:
+                        obj_list.append(value.__str__())
+        else:
+            for value in models.storage.all().values():
+                obj_list.append(value.__str__())
+        print(obj_list)
+            
 
 ''' to handel multiable command
 sys.argv list, which contains 
