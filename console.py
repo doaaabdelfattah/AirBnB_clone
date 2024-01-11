@@ -33,18 +33,11 @@ class HBNBCommand(cmd.Cmd):
     
     def do_EOF(self, line):
         """Quits command interpreter with ctrl+d
-         Args:
-            line(args): input argument for quiting
-            the terminal
-
         """
         return True
+
     def do_quit(self, line):
         """Quit command to exit the program
-         Args:
-            line(args): input argument for quiting
-            the terminal
-
         """
         return True
     
@@ -82,14 +75,14 @@ class HBNBCommand(cmd.Cmd):
         '''
         args = arg.split()
         if len(args) == 0:
-            print(" class name missing ")
+            print("** class name missing **")
             return
         class_name = args[0]
         if class_name not in HBNBCommand.__classes:
-            print(" class doesn't exist ")
+            print("** class doesn't exist **")
             return
         if len(args) == 1:
-            print(" instance id missing ")
+            print("** instance id missing **")
             return
         id_isinstance = args[1]
         # create the key for the dictionary of stored objects
@@ -97,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
         # get the dictionary of stored objects
         objects = models.storage.all()
         if key not in objects:
-            print(" no instance found ")
+            print("** no instance found **")
             return
             # print the value of the key
         print(objects[key])
@@ -118,8 +111,45 @@ class HBNBCommand(cmd.Cmd):
             for value in models.storage.all().values():
                 obj_list.append(value.__str__())
         print(obj_list)
-            
->>>>>>> 837f13b186df69f46165fd4df798315072d1ef58
+        
+        
+        
+        
+    def do_destroy(self, arg):
+        '''Usage: destroy <class name> <id>
+            It Deletes an instance based on the class name and id 
+            and save the change into the JSON file'''
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+        else:
+            class_name = args[0]
+            if class_name not in HBNBCommand.__classes:
+                print("** class doesn't exist **")
+            if len(args) == 2:
+                # Iterate over objects dictionary(__obj)
+                for key, value in models.storage.all().items():
+                    # if found the id in class
+                    if class_name == value.__class__.__name__ and args[1] == value.id :
+                        # delete object from obj dictionary
+                        del models.storage.all()[key]
+                        # Save the result to json file
+                        models.storage.save()
+                        return
+                # if not found
+                print("** no instance found **")
+            else:
+                print("** instance id missing **")
+
+                    
+
+
+
+
+
+
+
+
 
 ''' to handel multiable command
 sys.argv list, which contains 
