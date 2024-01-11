@@ -78,42 +78,6 @@ class HBNBCommand(cmd.Cmd):
                 # print its id
                 print(f"{new_obj.id}")
                 
-<<<<<<< HEAD
-    def do_show(self, arg):
-        '''
-        Prints the string representation of
-    an instance based on the class name and id
-        '''
-        args = arg.split()
-        if len(args) == 0:
-            print("** class name missing **")
-            return
-        class_name = args[0]
-        if class_name not in HBNBCommand.__classes:
-            print("** class doesn't exist **")
-            return
-        if len(args) == 1:
-            print("** instance id missing **")
-            return
-        id_isinstance = args[1]
-        # create the key for the dictionary of stored objects
-        key = "{}.{}".format(class_name, id_isinstance)
-        # get the dictionary of stored objects
-        objects = storage.all()
-        if key not in objects:
-            print("** no instance found **")
-            return
-            # print the value of the key
-        print(objects[key])
-                
-    
-        
-        
-        
-        
-
-        
-=======
                 
     def do_all(self, arg):
         '''Usage: all <classname> or all '''
