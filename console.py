@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 #!/usr/bin/python3
 """
 Custom class for cli program
@@ -8,6 +6,13 @@ import cmd
 import sys
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+from models import storage
 import models
 
 class HBNBCommand(cmd.Cmd):
@@ -113,10 +118,7 @@ class HBNBCommand(cmd.Cmd):
             for value in models.storage.all().values():
                 obj_list.append(value.__str__())
         print(obj_list)
-        
-        
-        
-        
+
     def do_destroy(self, arg):
         '''Usage: destroy <class name> <id>
             It Deletes an instance based on the class name and id 
@@ -142,59 +144,16 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
             else:
                 print("** instance id missing **")
-
-                    
-
-
-
-
-
-
-
-
-
-''' to handel multiable command
-sys.argv list, which contains 
-all the command-line arguments.
-You can loop through sys.argv[1:] 
-(excluding the first element, which is the script's name)
-and execute the commands
-if name == 'main':
-     my_cmd = HBNBCommand().cmdloop()
-if len(sys.argv) > 1:
-    for arg in sys.argv[1:]:
-        my_cmd.onecmd(arg)
-        --------------------- OR----------------
-        if name == "main":
-    # not Running in Terminal (non-interactive)
-    if not sys.stdin.isatty():
-        # (onecmd) method is used to interpret a single line of input as a command.
-        for line in sys.stdin:
-            # Read command line by line
-            # Stripe method to remove whitespace from beginning and the end
-            line = line.strip()
-            # Check if the line contains semicolons
-            if ";" in line:
-                # Call the default method
-                HBNBCommand().default(line)
-            else:
-                # Call the onecmd method
-                HBNBCommand().onecmd(line)
-    else:
-        HBNBCommand().cmdloop()
-
-'''
+                
     
-# Make the interpreter works in a loop
-if __name__ == "__main__":
+if __name__ == '__main__':
+    HBNBCommand().cmdloop()
 
-    # not Running in Terminal (non-interactive)
     if not sys.stdin.isatty():
         # (onecmd) method is used to interpret a single line of input as a command.
         for line in sys.stdin:
             # Read command line by line
             # Stripe method to remove whitespace from beginning and the end
             HBNBCommand().onecmd(line.strip())
-    else:
-        HBNBCommand().cmdloop()
->>>>>>> 3df269f47ceeeb37970ceda67f6f6afc5572e58c
+        else:
+            HBNBCommand().cmdloop()
