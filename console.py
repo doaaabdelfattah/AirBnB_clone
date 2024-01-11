@@ -6,6 +6,7 @@ import cmd
 import sys
 from models import storage
 from models.base_model import BaseModel
+import models
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
@@ -16,6 +17,22 @@ class HBNBCommand(cmd.Cmd):
     def preloop(self) -> None:
         print("Documented commands (type help <topic>):")
         print("========================================")
+<<<<<<< HEAD
+=======
+        
+    def do_help(self, line):
+        """overrides help method"""
+        cmd.Cmd.do_help(self, line)
+        
+    def help_quit(self):
+        """ help guide for quit command """
+        print('Quit command to exit the program')
+
+    def help_EOF(self):
+        """ help guide for EOF command """
+        print('EOF command to exit the program')
+
+>>>>>>> 837f13b186df69f46165fd4df798315072d1ef58
     
     def do_EOF(self, line):
         """Quits command interpreter with ctrl+d
@@ -57,10 +74,11 @@ class HBNBCommand(cmd.Cmd):
                 # create new object
                 new_obj = eval(args[0])()
                 # save new object to json file
-                new_obj.save()
+                models.storage.save()
                 # print its id
                 print(f"{new_obj.id}")
                 
+<<<<<<< HEAD
     def do_show(self, arg):
         '''
         Prints the string representation of
@@ -95,6 +113,25 @@ class HBNBCommand(cmd.Cmd):
         
 
         
+=======
+                
+    def do_all(self, arg):
+        '''Usage: all <classname> or all '''
+        args = arg.split()
+        obj_list = []
+        if args:
+            if args[0] not in HBNBCommand.__classes:
+                    print("** class doesn't exist **")
+            else:
+                for value in models.storage.all().values():
+                    if args[0] == value.__class__.__name__:
+                        obj_list.append(value.__str__())
+        else:
+            for value in models.storage.all().values():
+                obj_list.append(value.__str__())
+        print(obj_list)
+            
+>>>>>>> 837f13b186df69f46165fd4df798315072d1ef58
 
 ''' to handel multiable command
 sys.argv list, which contains 
