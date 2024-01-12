@@ -111,6 +111,7 @@ class HBNBCommand(cmd.Cmd):
         if args:
             if args[0] not in HBNBCommand.__classes:
                     print("** class doesn't exist **")
+                    return
             else:
                 for value in storage.all().values():
                     if args[0] == value.__class__.__name__:
