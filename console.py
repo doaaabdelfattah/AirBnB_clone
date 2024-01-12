@@ -17,13 +17,16 @@ import models
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
-    __classes = {"BaseModel", "User", "State", "City", "Place", "Amenity", "Review"}
+    __classes = {"BaseModel",
+                 "User",
+                 "State",
+                 "City",
+                 "Place",
+                 "Amenity",
+                 "Review"}
     '''The preloop method 
     is called once before the command loop starts.
     '''
-    def preloop(self) -> None:
-        print("Documented commands (type help <topic>):")
-        print("========================================")
         
     def do_help(self, line):
         """overrides help method"""
@@ -144,6 +147,47 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
             else:
                 print("** instance id missing **")
+                
+    def do_update(self, arg):
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        class_name = args[0]
+        if class_name not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+        id_isinstance = args[1]
+        # create the key for the dictionary of stored objects
+        key = "{}.{}".format(class_name, id_isinstance)
+        # get the dictionary of stored objects
+        all_objects = models.storage.all()
+        if key not in all_objects:
+            print("** no instance found **")
+            return
+        if len(args) == 2:
+            print("** attribute name missing **")
+            return
+        if len(args) == 3:
+            print("** value missing **")
+            return
+        attribute_name = args[2]
+        attribute_value = args[3]
+        types_valid = type(getattr(all_objects[key], attribute_name))
+        if hasattr(all_objects[key], attribute_name):
+            try:
+                attribute_value = types_valid(attribute_value)
+                setattr(all_objects[key], attribute_name, attribute_value)
+                all_objects[key].save()
+            except ValueError:
+                return
+        else:
+            print("** attribute doesn't exist **")
+            return
+
                 
     
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Custom BaseModel class for the AirBnb project
+BaseModel class for the AirBnb project
 """
 
 from uuid import uuid4
@@ -8,26 +8,18 @@ from datetime import datetime
 import models
 
 class BaseModel:
-    """Custom base for all the classes in the AirBnb console project
-
-    Attributes:
-        id (str): Unique user identity
-        created_at: Time for the creation of the instance
-        updated_at: Last Update of the instance.
-
-    Methods:
-        __str__: Returns string representation of the instance
-        save(self): updates 'updated_at' with current datetime
-        to_dict(self): returns the dictionary values of the instance obj
-
-    """
-    
+    '''Custom base for all the classes in the AirBnb console project'''
     def __init__(self, *args, **kwargs):
-        """initialize a public instance"""
+        """initialize a public instance
+        
+        *Args: args(unsed)
+        **kwargs (dic): key/value of attributes
+        
+        """
         #convert id value to string
         self.id = str(uuid4())
-        self.updated_at = datetime.now()
         self.created_at = datetime.now()
+        self.updated_at = datetime.now()
         # Create dictionary from input arguments
         if kwargs:
             for key, value in kwargs.items():
