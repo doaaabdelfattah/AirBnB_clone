@@ -15,23 +15,22 @@ from models.review import Review
 from models import storage
 import models
 
+
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
-    __classes = {"BaseModel",
-                 "User",
-                 "State",
-                 "City",
-                 "Place",
-                 "Amenity",
-                 "Review"}
-    '''The preloop method 
-    is called once before the command loop starts.
-    '''
-        
+    __classes = {
+        "BaseModel",
+        "User",
+        "Place",
+        "State",
+        "City",
+        "Amenity",
+        "Review"
+    }
+
     def do_help(self, line):
         """overrides help method"""
         cmd.Cmd.do_help(self, line)
-        
     def help_quit(self):
         """ help guide for quit command """
         print('Quit command to exit the program')
@@ -40,7 +39,7 @@ class HBNBCommand(cmd.Cmd):
         """ help guide for EOF command """
         print('EOF command to exit the program')
 
-    
+
     def do_EOF(self, line):
         """Quits command interpreter with ctrl+d
         """
@@ -50,20 +49,20 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program
         """
         return True
-    
-    # Aliasing (make exit the same as quit)
+
+    '''Aliasing (make exit the same as quit)'''
     do_exit = do_quit
-    
+
     def do_empty_line(self, line):
         """ Eliminates empty lines
         """
         pass
-    
+
     def do_create(self, arg):
         ''' Usage: create <class>
-        Creates a class instance,saves it (to the JSON file) 
+        Creates a class instance,saves it (to the JSON file)
         and prints its id '''
-        # Split the arguments to a list
+        '''Split the arguments to a list'''
         args = arg.split()
         if not arg:
             print(" class name missing ")
@@ -71,13 +70,13 @@ class HBNBCommand(cmd.Cmd):
             if args[0] not in HBNBCommand.__classes:
                 print(" class doesn't exist ")
             else:
-                # create new object
+                '''create new object'''
                 new_obj = eval(args[0])()
-                # save new object to json file
+                '''save new object to json file'''
                 models.storage.save()
-                # print its id
+                '''print its id'''
                 print(f"{new_obj.id}")
-                
+
     def do_show(self, arg):
         '''
         Prints the string representation of
@@ -95,14 +94,14 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
         id_isinstance = args[1]
-        # create the key for the dictionary of stored objects
+        '''create the key for the dicti stored objects'''
         key = "{}.{}".format(class_name, id_isinstance)
-        # get the dictionary of stored objects
+        '''get the dictionary of stored objects'''
         objects = models.storage.all()
         if key not in objects:
             print("** no instance found **")
             return
-            # print the value of the key
+            '''print the value of the key'''
         print(objects[key])
 
 
@@ -124,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         '''Usage: destroy <class name> <id>
-            It Deletes an instance based on the class name and id 
+            It Deletes an instance based on the class name and id
             and save the change into the JSON file'''
         args = arg.split()
         if len(args) == 0:
@@ -134,20 +133,20 @@ class HBNBCommand(cmd.Cmd):
             if class_name not in HBNBCommand.__classes:
                 print("** class doesn't exist **")
             if len(args) == 2:
-                # Iterate over objects dictionary(__obj)
+                '''Iterate over objects dictionary(__obj)'''
                 for key, value in models.storage.all().items():
-                    # if found the id in class
+                    '''if found the id in class'''
                     if class_name == value.__class__.__name__ and args[1] == value.id :
                         # delete object from obj dictionary
                         del models.storage.all()[key]
                         # Save the result to json file
                         models.storage.save()
                         return
-                # if not found
+                '''if not found'''
                 print("** no instance found **")
             else:
                 print("** instance id missing **")
-                
+
     def do_update(self, arg):
         args = arg.split()
         if len(args) == 0:
@@ -161,9 +160,9 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
         id_isinstance = args[1]
-        # create the key for the dictionary of stored objects
+        '''create the key for the dictionary of stored objects'''
         key = "{}.{}".format(class_name, id_isinstance)
-        # get the dictionary of stored objects
+        '''get the dictionary of stored objects'''
         all_objects = models.storage.all()
         if key not in all_objects:
             print("** no instance found **")
@@ -178,26 +177,24 @@ class HBNBCommand(cmd.Cmd):
         attribute_value = args[3]
         types_valid = type(getattr(all_objects[key], attribute_name))
         if hasattr(all_objects[key], attribute_name):
-            try:
                 attribute_value = types_valid(attribute_value)
                 setattr(all_objects[key], attribute_name, attribute_value)
                 all_objects[key].save()
-            except ValueError:
-                return
         else:
             print("** attribute doesn't exist **")
             return
 
-                
-    
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
 
     if not sys.stdin.isatty():
-        # (onecmd) method is used to interpret a single line of input as a command.
+        '''method is used to interpret the input as a comnd'''
         for line in sys.stdin:
-            # Read command line by line
-            # Stripe method to remove whitespace from beginning and the end
+            '''Read command line by line'''
+
             HBNBCommand().onecmd(line.strip())
+            '''method to remove whitespace from beg end'''
         else:
             HBNBCommand().cmdloop()

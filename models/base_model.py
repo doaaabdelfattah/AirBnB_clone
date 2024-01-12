@@ -11,24 +11,24 @@ class BaseModel:
     '''Custom base for all the classes in the AirBnb console project'''
     def __init__(self, *args, **kwargs):
         """initialize a public instance
-        
+
         *Args: args(unsed)
         **kwargs (dic): key/value of attributes
-        
+
         """
-        #convert id value to string
+        '''convert id value to string'''
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        # Create dictionary from input arguments
+        '''Create dictionary from input arguments'''
         if kwargs:
             for key, value in kwargs.items():
                 if key == 'updated_at' or key == 'created_at':
-                    # Convert datetime string into obj
-                    # strptime is class method so we call it on datetime
+                    '''Convert datetime string into obj'''
+                    '''strptime is class method so we call it on datetime'''
                     self.__dict__[key] = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                else:        
-                    # add items to dict
+                else:
+                    '''add items to dict'''
                     self.__dict__[key] = value
         else:
             models.storage.new(self)
@@ -46,10 +46,10 @@ class BaseModel:
     def to_dict(self):
         """Returns a dictionary representation"""
         data_copied = self.__dict__.copy()
-        #to access name of class
+        '''to access name of class'''
         data_copied["__class__"] = self.__class__.__name__
-        #Convert to ISO format
+        '''Convert to ISO format'''
         data_copied["created_at"] = self.created_at.isoformat()
         data_copied["updated_at"] = self.updated_at.isoformat()
-        #return the dictionary
+        '''return the dictionary'''
         return data_copied
