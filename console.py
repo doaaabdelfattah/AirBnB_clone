@@ -171,6 +171,8 @@ class HBNBCommand(cmd.Cmd):
             return
         if len(args) == 4:
             attribute_value = args[3]
+        if attribute_value.startswith('"') and attribute_value.endswith('"'):
+            attribute_value = attribute_value[1:-1]
             
         setattr(models.storage.all()[key],args[2],attribute_value)
         models.storage.all()[key].save()
