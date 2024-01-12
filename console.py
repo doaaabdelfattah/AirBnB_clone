@@ -4,6 +4,7 @@ Custom class for cli program
 """
 import cmd
 import sys
+import models
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -12,8 +13,6 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-from models import storage
-import models
 
 
 class HBNBCommand(cmd.Cmd):
@@ -73,7 +72,7 @@ class HBNBCommand(cmd.Cmd):
                 '''create new object'''
                 new_obj = eval(args[0])()
                 '''save new object to json file'''
-                models.storage.save()
+                storage.save()
                 '''print its id'''
                 print(f"{new_obj.id}")
 
@@ -97,7 +96,7 @@ class HBNBCommand(cmd.Cmd):
         '''create the key for the dicti stored objects'''
         key = "{}.{}".format(class_name, id_isinstance)
         '''get the dictionary of stored objects'''
-        objects = models.storage.all()
+        objects = storage.all()
         if key not in objects:
             print("** no instance found **")
             return
@@ -113,11 +112,11 @@ class HBNBCommand(cmd.Cmd):
             if args[0] not in HBNBCommand.__classes:
                     print("** class doesn't exist **")
             else:
-                for value in models.storage.all().values():
+                for value in storage.all().values():
                     if args[0] == value.__class__.__name__:
                         obj_list.append(value.__str__())
         else:
-            for value in models.storage.all().values():
+            for value in storage.all().values():
                 obj_list.append(value.__str__())
         print(obj_list)
 
@@ -134,58 +133,49 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             if len(args) == 2:
                 '''Iterate over objects dictionary(__obj)'''
-                for key, value in models.storage.all().items():
+                for key, value in storage.all().items():
                     '''if found the id in class'''
                     if class_name == value.__class__.__name__ and args[1] == value.id :
                         # delete object from obj dictionary
-                        del models.storage.all()[key]
+                        del storage.all()[key]
                         # Save the result to json file
-                        models.storage.save()
+                        storage.save()
                         return
                 '''if not found'''
                 print("** no instance found **")
             else:
                 print("** instance id missing **")
-
-    def do_update(self, arg):
+        
+    def do_update(self,arg):
         args = arg.split()
         if len(args) == 0:
-            print("** class name missing **")
+            print(" class name missing ")
             return
-        class_name = args[0]
-        if class_name not in HBNBCommand.__classes:
-            print("** class doesn't exist **")
+        if args[0] not in HBNBCommand.__classes:
+            print(" class doesn't exist ")
             return
         if len(args) == 1:
-            print("** instance id missing **")
+            print(" instance id missing ")
             return
-        id_isinstance = args[1]
-        '''create the key for the dictionary of stored objects'''
-        key = "{}.{}".format(class_name, id_isinstance)
-        '''get the dictionary of stored objects'''
-        all_objects = models.storage.all()
-        if key not in all_objects:
-            print("** no instance found **")
+        key = "{}.{}".format(args[0],args[1])
+        if key not in models.storage.all().keys():
+            print(" no instance found ")
             return
         if len(args) == 2:
-            print("** attribute name missing **")
+            print(" attribute name missing ")
             return
         if len(args) == 3:
-            print("** value missing **")
+            print(" value missing ")
             return
-        attribute_name = args[2]
-        attribute_value = args[3]
-        types_valid = type(getattr(all_objects[key], attribute_name))
-        if hasattr(all_objects[key], attribute_name):
-                attribute_value = types_valid(attribute_value)
-                setattr(all_objects[key], attribute_name, attribute_value)
-                all_objects[key].save()
-        else:
-            print("** attribute doesn't exist **")
-            return
+        if len(args) == 4:
+            attribute_value = args[3]
+            
+            type(setattr(models.storage.all()[key],args[2],attribute_value))
+            models.storage.all()[key].save()
 
-
-
+                
+    
+    
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
 
