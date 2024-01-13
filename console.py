@@ -177,13 +177,13 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    HBNBCommand().cmdloop()
-    # if not sys.stdin.isatty():
-    #     '''method is used to interpret the input as a comnd'''
-    #     for line in sys.stdin:
-    #         '''Read command line by line'''
+    # HBNBCommand().cmdloop()
+    if not sys.stdin.isatty():
+        '''method is used to interpret the input as a comnd'''
+        for line in sys.stdin:
+            '''Read command line by line'''
 
-    #         HBNBCommand().onecmd(line.strip())
-    #         '''method to remove whitespace from beg end'''
-    #     else:
-    #         HBNBCommand().cmdloop()
+            HBNBCommand().onecmd(line.strip())
+            '''method to remove whitespace from beg end'''
+    else:
+        HBNBCommand().cmdloop()
