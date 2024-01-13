@@ -14,35 +14,37 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+
 class TestFileStorage_instantiation(unittest.TestCase):
     '''Unittest for FileStorage class'''
-    
+
     def test_instantiations(self):
         self.assertEqual(FileStorage, type(FileStorage()))
 
     def test_file_path(self):
         self.assertEqual(str, type(FileStorage._FileStorage__file_path))
-    
+
     def test_obj_dict(self):
         self.assertEqual(dict, type(FileStorage._FileStorage__objects))
 
     def test_storage_var(self):
         self.assertEqual(FileStorage, type(models.storage))
-        
+
+
 class TestFileStorage_methods(unittest.TestCase):
     '''unittest for FileStorage methods'''
-    
+
     # Unittest for all()
     def test_dict_type(self):
         instant = FileStorage
         self.assertEqual(dict, type(models.storage.all()))
-    
+
     # Unittest for new()
     def test_new_method(self):
         instant = BaseModel()
         models.storage.new(instant)
         self.assertIn("BaseModel." + instant.id, models.storage.all().keys())
-    
+
     # Unittest for save()
     def test_save_method(self):
         instant = BaseModel()
@@ -50,18 +52,20 @@ class TestFileStorage_methods(unittest.TestCase):
         models.storage.save()
         with open("file.json", "r") as f:
             self.assertIn("BaseModel." + instant.id, f.read())
-    
+
     # Unittest for reload()
     def test_save_method(self):
         instant = BaseModel()
         models.storage.new(instant)
         models.storage.save()
         models.storage.reload()
-        self.assertIn("BaseModel." + instant.id, FileStorage._FileStorage__objects)
-    
-    # def test_reload_no_file(self):
-    #     self.assertRaises(FileNotFoundError, models.storage.reload())
-    
+        self.assertIn("BaseModel." + instant.id,
+                      FileStorage._FileStorage__objects)
+
+    '''def test_reload_no_file(self):
+    self.assertRaises(
+        FileNotFoundError, models.storage.reload())'''
+
 
 if __name__ == '__main__':
     unittest.main()
