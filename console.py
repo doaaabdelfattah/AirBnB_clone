@@ -27,17 +27,17 @@ class HBNBCommand(cmd.Cmd):
         "Review"
     }
 
-    def do_help(self, line):
-        """overrides help method"""
-        cmd.Cmd.do_help(self, line)
+    # def do_help(self, line):
+    #     """overrides help method"""
+    #     cmd.Cmd.do_help(self, line)
 
-    def help_quit(self):
-        """ help guide for quit command """
-        print('Quit command to exit the program')
+    # def help_quit(self):
+    #     """ help guide for quit command """
+    #     print('Quit command to exit the program')
 
-    def help_EOF(self):
-        """ help guide for EOF command """
-        print('EOF command to exit the program')
+    # def help_EOF(self):
+    #     """ help guide for EOF command """
+    #     print('EOF command to exit the program')
 
     def do_EOF(self, line):
         """Quits command interpreter with ctrl+d"""
@@ -51,7 +51,7 @@ class HBNBCommand(cmd.Cmd):
     '''Aliasing (make exit the same as quit)'''
     do_exit = do_quit
 
-    def do_empty_line(self, line):
+    def emptyline(self):
         """ Eliminates empty lines
         """
         pass
@@ -180,6 +180,7 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
+
     # if not sys.stdin.isatty():
     #     '''method is used to interpret the input as a comand'''
     #     for line in sys.stdin:
