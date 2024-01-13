@@ -104,7 +104,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         '''Usage: all <classname> or all '''
-        args = arg.split()
+        args = arg.split(" ")
         obj_list = []
         if args:
             if args[0] not in HBNBCommand.__classes:
