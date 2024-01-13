@@ -177,8 +177,6 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    # HBNBCommand().cmdloop()
-
     if not sys.stdin.isatty():
         '''method is used to interpret the input as a comnd'''
         for line in sys.stdin:
