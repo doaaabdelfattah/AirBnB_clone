@@ -30,6 +30,7 @@ class HBNBCommand(cmd.Cmd):
     def do_help(self, line):
         """overrides help method"""
         cmd.Cmd.do_help(self, line)
+
     def help_quit(self):
         """ help guide for quit command """
         print('Quit command to exit the program')
@@ -38,10 +39,8 @@ class HBNBCommand(cmd.Cmd):
         """ help guide for EOF command """
         print('EOF command to exit the program')
 
-
     def do_EOF(self, line):
-        """Quits command interpreter with ctrl+d
-        """
+        """Quits command interpreter with ctrl+d"""
         return True
 
     def do_quit(self, line):
@@ -103,15 +102,14 @@ class HBNBCommand(cmd.Cmd):
             '''print the value of the key'''
         print(objects[key])
 
-
     def do_all(self, arg):
         '''Usage: all <classname> or all '''
         args = arg.split()
         obj_list = []
         if args:
             if args[0] not in HBNBCommand.__classes:
-                    print("** class doesn't exist **")
-                    return
+                print("** class doesn't exist **")
+                return
             else:
                 for value in storage.all().values():
                     if args[0] == value.__class__.__name__:
@@ -128,27 +126,26 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
-            return 
+            return
         elif args[0] not in HBNBCommand.__classes:
-                print("** class doesn't exist **")
-        elif len(args) == 1 :
+            print("** class doesn't exist **")
+        elif len(args) == 1:
             print("** instance id missing **")
             return
-            # Iterate over objects dictionary(__obj)
+            '''Iterate over objects dictionary(__obj)'''
         else:
             for key, value in storage.all().items():
-                    # if found the id in class
-                if args[0] == value.__class__.__name__ and args[1] == value.id :
-                        # delete object from obj dictionary
+                '''if found the id in class'''
+                if args[0] == value.__class__.__name__ and args[1] == value.id:
+                    '''delete object from obj dictionary'''
                     del storage.all()[key]
-                        # Save the result to json file
+                    '''Save the result to json file'''
                     storage.save()
                     return
-            # if not found
+                '''if not found'''
             print("** no instance found **")
 
-        
-    def do_update(self,arg):
+    def do_update(self, arg):
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -159,13 +156,13 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 1:
             print("** instance id missing **")
             return
-        key = "{}.{}".format(args[0],args[1])
+        key = "{}.{}".format(args[0], args[1])
         if key not in models.storage.all().keys():
             print("** no instance found **")
             return
         if len(args) == 2:
             print("** attribute name missing **")
-            
+
             return
         if len(args) == 3:
             print("** value missing **")
@@ -174,11 +171,11 @@ class HBNBCommand(cmd.Cmd):
             attribute_value = args[3]
         if attribute_value.startswith('"') and attribute_value.endswith('"'):
             attribute_value = attribute_value[1:-1]
-            
-        setattr(models.storage.all()[key],args[2],attribute_value)
+
+        setattr(models.storage.all()[key], args[2], attribute_value)
         models.storage.all()[key].save()
-         
-    
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
 

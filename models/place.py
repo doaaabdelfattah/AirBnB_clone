@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 '''custome a Place class that inhirets from BasModel'''
 from models.base_model import BaseModel
+
+
 class Place(BaseModel):
     '''
     Artts:
@@ -14,7 +16,7 @@ class Place(BaseModel):
         price_by_night: integer - 0
         latitude: float - 0.0
         longitude: float - 0.0
-        amenity_ids: list of string - empty list: it will be the list of Amenity.id later    
+        amenity_ids: list of str
     '''
 
     city_id: str = ""

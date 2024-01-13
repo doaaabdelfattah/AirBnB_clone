@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 '''custome a user class that inhirets from BasModel'''
 from models.base_model import BaseModel
+
+
 class User(BaseModel):
     """a User class
 
@@ -15,4 +17,3 @@ class User(BaseModel):
     password = ""
     first_name = ""
     last_name = ""
-    

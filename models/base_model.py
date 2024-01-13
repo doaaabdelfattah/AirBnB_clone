@@ -7,6 +7,7 @@ from uuid import uuid4
 from datetime import datetime
 import models
 
+
 class BaseModel:
     '''Custom base for all the classes in the AirBnb console project'''
     def __init__(self, *args, **kwargs):
@@ -25,7 +26,8 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key == 'updated_at' or key == 'created_at':
                     '''Convert datetime string into obj'''
-                    '''strptime is class method so we call it on datetime'''
+                    '''strptime is class method
+                    so we call it on datetime'''
                     self.__dict__[key] = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 else:
                     '''add items to dict'''
@@ -33,11 +35,11 @@ class BaseModel:
         else:
             models.storage.new(self)
 
-
     def __str__(self):
         """return string representation of obj"""
         return "[{}] ({}) {}".format(self.__class__.__name__,
                                      self.id, self.__dict__)
+
     def save(self):
         """update the updated_at to current time"""
         self.updated_at = datetime.now()
