@@ -58,6 +58,17 @@ class TestFileStorage_methods(unittest.TestCase):
         models.storage.save()
         models.storage.reload()
         self.assertIn("BaseModel." + instant.id, FileStorage._FileStorage__objects)
+    
+    # def test_reload_no_file(self):
+    #     self.assertRaises(FileNotFoundError, models.storage.reload())
+    
+    def test_new_with_args(self):
+        with self.assertRaises(TypeError):
+            models.storage.new(BaseModel(), 1)
+
+    def test_new_with_None(self):
+        with self.assertRaises(AttributeError):
+            models.storage.new(None)
 
 if __name__ == '__main__':
     unittest.main()
