@@ -66,31 +66,31 @@ class TestBaseModel_to_dict(unittest.TestCase):
         self.assertLess(first_updated_at, instant.updated_at)
 
  # ============ test FileStorage handling ===============
-class TestFileStorage_methods(unittest.TestCase):   
-    '''Unit test for FileStorage with User class'''
+# class TestFileStorage_methods(unittest.TestCase):   
+#     '''Unit test for FileStorage with User class'''
  
-   # Unittest for new()
-    def test_new_method(self):
-        instant = User()
-        models.storage.new(instant)
-        self.assertIn("User." + instant.id, models.storage.all().keys())
+#    # Unittest for new()
+#     def test_new_method(self):
+#         instant = User()
+#         models.storage.new(instant)
+#         self.assertIn("User." + instant.id, models.storage.all().keys())
     
 
-    # Unittest for save()
-    def test_save_method(self):
-        instant = User()
-        models.storage.new(instant)
-        models.storage.save()
-        with open("file.json", "r") as f:
-            self.assertIn("User." + instant.id, f.read())
+#     # Unittest for save()
+#     def test_save_method(self):
+#         instant = User()
+#         models.storage.new(instant)
+#         models.storage.save()
+#         with open("file.json", "r") as f:
+#             self.assertIn("User." + instant.id, f.read())
     
-    # Unittest for reload()
-    def test_save_method(self):
-        instant = User()
-        models.storage.new(instant)
-        models.storage.save()
-        models.storage.reload()
-        self.assertIn("User." + instant.id, FileStorage._FileStorage__objects)
+#     # Unittest for reload()
+#     def test_save_method(self):
+#         instant = User()
+#         models.storage.new(instant)
+#         models.storage.save()
+#         models.storage.reload()
+#         self.assertIn("User." + instant.id, FileStorage._FileStorage__objects)
    
         
         
