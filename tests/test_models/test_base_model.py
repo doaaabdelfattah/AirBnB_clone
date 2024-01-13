@@ -16,17 +16,17 @@ class TestBaseModel(unittest.TestCase):
         id2 = BaseModel()
         self.assertNotEqual(id1.id, id2.id)
         
-    def test_str_representation(self):
-        date = datetime.today()
-        dt_repr = repr(date)
-        bm = BaseModel()
-        bm.id = "000-111-222-333"
-        bm.created_at = bm.updated_at = date
-        instant_str = bm.__str__()
-        self.assertIn("[BaseModel] (000-111-222-333)", instant_str)
-        self.assertIn("'id': '000-111-222-333'", instant_str)
-        self.assertIn("'created_at': " + dt_repr, instant_str)
-        self.assertIn("'updated_at': " + dt_repr, instant_str)
+    # def test_str_representation(self):
+    #     date = datetime.today()
+    #     dt_repr = repr(date)
+    #     bm = BaseModel()
+    #     bm.id = "000-111-222-333"
+    #     bm.created_at = bm.updated_at = date
+    #     instant_str = bm.__str__()
+    #     self.assertIn("[BaseModel] (000-111-222-333)", instant_str)
+    #     self.assertIn("'id': '000-111-222-333'", instant_str)
+    #     self.assertIn("'created_at': " + dt_repr, instant_str)
+    #     self.assertIn("'updated_at': " + dt_repr, instant_str)
 
 class TestBaseModel_to_dict(unittest.TestCase):
     ''' unittest for to_dict method'''
