@@ -92,11 +92,7 @@ class TestBaseModel_to_dict(unittest.TestCase):
 #         models.storage.reload()
 #         self.assertIn("User." + instant.id, FileStorage._FileStorage__objects)
    
-        
-        
-
-        
-        
+      
 
 if __name__ == '__main__':
     unittest.main()
