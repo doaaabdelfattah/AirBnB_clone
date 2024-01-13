@@ -29,7 +29,35 @@ class TestFileStorage_instantiation(unittest.TestCase):
     def test_storage_var(self):
         self.assertEqual(FileStorage, type(models.storage))
         
-
+class TestFileStorage_methods(unittest.TestCase):
+    '''unittest for FileStorage methods'''
+    
+    # Unittest for all()
+    def test_dict_type(self):
+        instant = FileStorage
+        self.assertEqual(dict, type(models.storage.all()))
+    
+    # Unittest for new()
+    def test_new_method(self):
+        instant = BaseModel()
+        models.storage.new(instant)
+        self.assertIn("BaseModel." + instant.id, models.storage.all().keys())
+    
+    # Unittest for save()
+    def test_save_method(self):
+        instant = BaseModel()
+        models.storage.new(instant)
+        models.storage.save()
+        with open("file.json", "r") as f:
+            self.assertIn("BaseModel." + instant.id, f.read())
+    
+    # Unittest for reload()
+    def test_save_method(self):
+        instant = BaseModel()
+        models.storage.new(instant)
+        models.storage.save()
+        models.storage.reload()
+        self.assertIn("BaseModel." + instant.id, FileStorage._FileStorage__objects)
 
 if __name__ == '__main__':
     unittest.main()
