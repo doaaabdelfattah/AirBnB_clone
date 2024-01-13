@@ -176,8 +176,8 @@ class HBNBCommand(cmd.Cmd):
         models.storage.all()[key].save()
 
 
-if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+# if __name__ == '__main__':
+#     HBNBCommand().cmdloop()
 
     if not sys.stdin.isatty():
         '''method is used to interpret the input as a comnd'''
