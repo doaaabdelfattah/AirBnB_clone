@@ -14,12 +14,14 @@ from models.place import Place
 from models.engine.file_storage import FileStorage
 
 # ============ test instantiation ===============
+
+
 class TestPlace_instantiation(unittest.TestCase):
     '''Unittest for User class'''
-    
+
     def test_instantiations(self):
         self.assertEqual(Place, type(Place()))
-    
+
     # test for attributes
     def test_att_type(self):
         instant = Place()
@@ -35,11 +37,10 @@ class TestPlace_instantiation(unittest.TestCase):
         self.assertEqual(float, type(instant.latitude))
         self.assertEqual(float, type(instant.longitude))
         self.assertEqual(list, type(instant.amenity_ids))
-        
-    
+
     def test_created_at_is_public_datetime(self):
         self.assertEqual(datetime, type(Place().created_at))
-    
+
     def test_id_notequal(self):
         id1 = Place()
         id2 = Place()
@@ -48,24 +49,24 @@ class TestPlace_instantiation(unittest.TestCase):
 
 # ============ test to_dict ===============
 class TestPlace_to_dict(unittest.TestCase):
-    
+
     def test_type(self):
         instant = Place()
         self.assertTrue(dict, type(instant.to_dict))
-    
+
     def test_keys(self):
         instant = Place()
         self.assertIn("id", instant.to_dict())
         self.assertIn("created_at", instant.to_dict())
         self.assertIn("updated_at", instant.to_dict())
         self.assertIn("__class__", instant.to_dict())
-   
+
     def test_datetime_string(self):
         instant = Place()
         inst_dict = instant.to_dict()
         self.assertTrue(str, type(inst_dict["created_at"]))
         self.assertTrue(str, type(inst_dict["updated_at"]))
-    
+
     def test_save(self):
         instant = Place()
         sleep(0.05)
