@@ -151,24 +151,24 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self,arg):
         args = arg.split()
         if len(args) == 0:
-            print(" class name missing ")
+            print("** class name missing **")
             return
         if args[0] not in HBNBCommand.__classes:
-            print(" class doesn't exist ")
+            print("** class doesn't exist **")
             return
         if len(args) == 1:
-            print(" instance id missing ")
+            print("** instance id missing **")
             return
         key = "{}.{}".format(args[0],args[1])
         if key not in models.storage.all().keys():
-            print(" no instance found ")
+            print("** no instance found **")
             return
         if len(args) == 2:
-            print(" attribute name missing ")
+            print("** attribute name missing **")
             
             return
         if len(args) == 3:
-            print(" value missing ")
+            print("** value missing **")
             return
         if len(args) == 4:
             attribute_value = args[3]
@@ -177,9 +177,7 @@ class HBNBCommand(cmd.Cmd):
             
         setattr(models.storage.all()[key],args[2],attribute_value)
         models.storage.all()[key].save()
-
-                
-    
+         
     
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
