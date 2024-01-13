@@ -30,8 +30,8 @@ class TestCity_instantiation(unittest.TestCase):
         self.assertEqual(datetime, type(City().created_at))
     
     def test_id_notequal(self):
-        id1 = BaseModel()
-        id2 = BaseModel()
+        id1 = City()
+        id2 = City()
         self.assertNotEqual(id1.id, id2.id)
 
 
