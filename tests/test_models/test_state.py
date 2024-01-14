@@ -40,6 +40,7 @@ def test_id_notequal(self):
 
 # ============ test to_dict ===============
 class TestState_to_dict(unittest.TestCase):
+    '''Unittest for class'''
 
     def test_type(self):
         instant = State()
