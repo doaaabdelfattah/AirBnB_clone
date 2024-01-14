@@ -1,5 +1,5 @@
 # Description of the project
-
+-----------------------
 The Airbnb Clone project aims to replicate the core features of the Airbnb platform,
 providing users with a platform to list their properties for short-term rentals
 and enabling other users to discover and book accommodations for their travel needs.
