@@ -42,6 +42,7 @@ class TestUser_instantiation(unittest.TestCase):
 
 # ============ test to_dict ===============
 class TestBaseModel_to_dict(unittest.TestCase):
+    '''Unittest for User class'''
 
     def test_type(self):
         instant = User()

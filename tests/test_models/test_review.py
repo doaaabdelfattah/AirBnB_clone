@@ -41,6 +41,7 @@ class TestReview_instantiation(unittest.TestCase):
 
 # ============ test to_dict ===============
 class TestReview_to_dict(unittest.TestCase):
+    '''Unittest for class'''
 
     def test_type(self):
         instant = Review()
