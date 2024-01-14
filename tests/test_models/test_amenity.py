@@ -110,17 +110,6 @@ class TestAmenity_instantiation(unittest.TestCase):
         am.save()
         self.assertLess(first_updated_at, am.updated_at)
 
-    # def test_two_saves(self):
-    #     am = Amenity()
-    #     sleep(0.05)
-    #     first_updated_at = am.updated_at
-    #     am.save()
-    #     second_updated_at = am.updated_at
-    #     self.assertLess(first_updated_at, second_updated_at)
-    #     sleep(0.05)
-    #     am.save()
-    #     self.assertLess(second_updated_at, am.updated_at)
-
     def test_save_with_arg(self):
         am = Amenity()
         with self.assertRaises(TypeError):
@@ -173,15 +162,6 @@ class TestAmenity_to_dict(unittest.TestCase):
             "updated_at": dt.isoformat(),
         }
         self.assertDictEqual(am.to_dict(), tdict)
-
-    # def test_contrast_to_dict_dunder_dict(self):
-    #     am = Amenity()
-    #     self.assertNotEqual(am.to_dict(), am.__dict__)
-
-    # def test_to_dict_with_arg(self):
-    #     am = Amenity()
-    #     with self.assertRaises(TypeError):
-    #         am.to_dict(None)
 
 
 if __name__ == "__main__":
