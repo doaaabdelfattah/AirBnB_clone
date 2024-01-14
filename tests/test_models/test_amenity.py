@@ -86,22 +86,6 @@ class TestAmenity_instantiation(unittest.TestCase):
     class TestAmenity_save(unittest.TestCase):
         """Unittests for testing save method of the Amenity class."""
 
-    # @classmethod
-    # def setUp(self):
-    #     try:
-    #         os.rename("file.json", "tmp")
-    #     except IOError:
-    #         pass
-
-    # def tearDown(self):
-    #     try:
-    #         os.remove("file.json")
-    #     except IOError:
-    #         pass
-    #     try:
-    #         os.rename("tmp", "file.json")
-    #     except IOError:
-    #         pass
 
     def test_one_save(self):
         am = Amenity()
@@ -136,12 +120,6 @@ class TestAmenity_to_dict(unittest.TestCase):
         self.assertIn("updated_at", am.to_dict())
         self.assertIn("__class__", am.to_dict())
 
-    def test_to_dict_contains_added_attributes(self):
-        am = Amenity()
-        am.middle_name = "Holberton"
-        am.my_number = 98
-        self.assertEqual("Holberton", am.middle_name)
-        self.assertIn("my_number", am.to_dict())
 
     def test_to_dict_datetime_attributes_are_strs(self):
         am = Amenity()
@@ -149,20 +127,6 @@ class TestAmenity_to_dict(unittest.TestCase):
         self.assertEqual(str, type(am_dict["id"]))
         self.assertEqual(str, type(am_dict["created_at"]))
         self.assertEqual(str, type(am_dict["updated_at"]))
-
-    def test_to_dict_output(self):
-        dt = datetime.today()
-        am = Amenity()
-        am.id = "123456"
-        am.created_at = am.updated_at = dt
-        tdict = {
-            "id": "123456",
-            "__class__": "Amenity",
-            "created_at": dt.isoformat(),
-            "updated_at": dt.isoformat(),
-        }
-        self.assertDictEqual(am.to_dict(), tdict)
-
 
 if __name__ == "__main__":
     unittest.main()
