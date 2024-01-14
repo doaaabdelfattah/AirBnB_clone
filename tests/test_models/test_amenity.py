@@ -86,7 +86,6 @@ class TestAmenity_instantiation(unittest.TestCase):
     class TestAmenity_save(unittest.TestCase):
         """Unittests for testing save method of the Amenity class."""
 
-
     def test_one_save(self):
         am = Amenity()
         sleep(0.05)
@@ -120,13 +119,13 @@ class TestAmenity_to_dict(unittest.TestCase):
         self.assertIn("updated_at", am.to_dict())
         self.assertIn("__class__", am.to_dict())
 
-
     def test_to_dict_datetime_attributes_are_strs(self):
         am = Amenity()
         am_dict = am.to_dict()
         self.assertEqual(str, type(am_dict["id"]))
         self.assertEqual(str, type(am_dict["created_at"]))
         self.assertEqual(str, type(am_dict["updated_at"]))
+
 
 if __name__ == "__main__":
     unittest.main()
