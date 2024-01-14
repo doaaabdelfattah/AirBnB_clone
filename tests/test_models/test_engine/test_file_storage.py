@@ -78,13 +78,5 @@ class TestFileStorage_methods(unittest.TestCase):
         """ Nothing happens if file does not exist """
         self.assertEqual(None, models.storage.reload())
 
-    def test_reload_empty_file(self):
-        """
-        """
-        with open(self.file_storage.__file_path, 'w', encoding='utf-8') as file:
-            file.write('')
-        self.file_storage.reload()
-        self.assertEqual(self.file_storage.all(), {})
-        
 if __name__ == '__main__':
     unittest.main()

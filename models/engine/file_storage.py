@@ -71,4 +71,4 @@ class FileStorage:
                                 add it to the __objects dictionary.'''
                         self.new(new_instance)
         except FileNotFoundError:
-            return
+            pass
