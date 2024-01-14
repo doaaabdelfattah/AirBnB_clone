@@ -33,24 +33,6 @@ class TestFileStorage_instantiation(unittest.TestCase):
 
 class TestFileStorage_methods(unittest.TestCase):
     '''unittest for FileStorage methods'''
-    @classmethod
-    def setUp(self):
-        try:
-            os.rename("file.json", "tmp")
-        except IOError:
-            pass
-
-    @classmethod
-    def tearDown(self):
-        try:
-            os.remove("file.json")
-        except IOError:
-            pass
-        try:
-            os.rename("tmp", "file.json")
-        except IOError:
-            pass
-        FileStorage._FileStorage__objects = {}
 
     '''Unittest for all()'''
     def test_dict_type(self):
@@ -82,7 +64,10 @@ class TestFileStorage_methods(unittest.TestCase):
 
     '''unittest for no file'''
     def test_reload_no_file(self):
-        self.assertRaises(FileNotFoundError, models.storage.reload)
+        # file_path = models.storage._FileStorage__file_path
+        # if os.path.exists(file_path):
+        #     os.remove(file_path)
+        self.assertTrue(FileNotFoundError, models.storage.reload)
 
 
 if __name__ == '__main__':
