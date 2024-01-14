@@ -25,7 +25,6 @@ EOF  help  quit
 $
 ```
 
-
 # Files and directories: 
 1. models: will contain all classes used for the entire project. A class, called “model” in a OOP project is the representation of an object/instance.
 2. tests
