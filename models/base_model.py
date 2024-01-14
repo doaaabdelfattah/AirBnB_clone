@@ -28,7 +28,8 @@ class BaseModel:
                     '''Convert datetime string into obj'''
                     '''strptime is class method
                     so we call it on datetime'''
-                    self.__dict__[key] = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    self.__dict__[key] = datetime.strptime(
+                        value, "%Y-%m-%dT%H:%M:%S.%f")
                 else:
                     '''add items to dict'''
                     self.__dict__[key] = value

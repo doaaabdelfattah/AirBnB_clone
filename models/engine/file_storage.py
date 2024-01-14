@@ -14,6 +14,13 @@ from models.review import Review
 
 
 class FileStorage:
+    '''
+        serializes to a JSON file and deserializes
+        JSON file to instances
+        Args:
+            file_path: path to the JSON file
+            objects: will store all objects'''
+
     __file_path = "./file.json"
     __objects = {}
 
@@ -40,13 +47,13 @@ class FileStorage:
             json.dump(json_data, f)
 
     def reload(self):
-       try:
-           with open(FileStorage.__file_path, 'r') as f:
-            if os.path.getsize(self.__file_path) > 0:
-                Current_dict = json.load(f)
-                '''loop through all objects in Current_dict'''
-                for value in Current_dict.values():
-                    '''extract the class name from object keys as string'''
+        try:
+            with open(FileStorage.__file_path, 'r') as f:
+                if os.path.getsize(self.__file_path) > 0:
+                    Current_dict = json.load(f)
+                    '''loop through all objects in Current_dict'''
+                    for value in Current_dict.values():
+                        '''extract the class name from object keys as string'''
                     cls_name = value["__class__"]
                     '''Remove the "__class__"
                         key from the dictionary as it'not necessary'''
@@ -62,5 +69,5 @@ class FileStorage:
                             the newly created object as an argument to
                             add it to the __objects dictionary.'''
                     self.new(new_instance)
-       except FileNotFoundError:
-        return
+        except FileNotFoundError:
+            return
