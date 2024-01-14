@@ -4,6 +4,7 @@ BaseModel class for the AirBnb project
 """
 
 from uuid import uuid4
+import uuid
 from datetime import datetime
 import models
 
@@ -35,6 +36,7 @@ class BaseModel:
                     self.__dict__[key] = value
         else:
             models.storage.new(self)
+
 
     def __str__(self):
         """return string representation of obj"""
