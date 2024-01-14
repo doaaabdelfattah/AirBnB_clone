@@ -68,6 +68,6 @@ class FileStorage:
                         '''The new method is called with
                                 the newly created object as an argument to
                                 add it to the __objects dictionary.'''
-                    self.new(new_instance)
+                        self.new(new_instance)
         except FileNotFoundError:
             return
