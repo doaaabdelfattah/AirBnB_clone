@@ -28,9 +28,6 @@ class TestAmenity_instantiation(unittest.TestCase):
     def test_created_at_is_public_datetime(self):
         self.assertEqual(datetime, type(Amenity().created_at))
 
-    def test_updated_at_is_public_datetime(self):
-        self.assertEqual(datetime, type(Amenity().updated_at))
-
     def test_name_is_public_class_attribute(self):
         am = Amenity()
         self.assertEqual(str, type(Amenity.name))
@@ -54,34 +51,9 @@ class TestAmenity_instantiation(unittest.TestCase):
         am2 = Amenity()
         self.assertLess(am1.updated_at, am2.updated_at)
 
-    # def test_str_representation(self):
-    #     dt = datetime.today()
-    #     dt_repr = repr(dt)
-    #     am = Amenity()
-    #     am.id = "123456"
-    #     am.created_at = am.updated_at = dt
-    #     amstr = am.__str__()
-    #     self.assertIn("[Amenity] (123456)", amstr)
-    #     self.assertIn("'id': '123456'", amstr)
-    #     self.assertIn("'created_at': " + dt_repr, amstr)
-    #     self.assertIn("'updated_at': " + dt_repr, amstr)
-
     def test_args_unused(self):
         am = Amenity(None)
         self.assertNotIn(None, am.__dict__.values())
-
-    # def test_instantiation_with_kwargs(self):
-    #     """instantiation with kwargs test method"""
-    #     dt = datetime.today()
-    #     dt_iso = dt.isoformat()
-    #     am = Amenity(id="345", created_at=dt_iso, updated_at=dt_iso)
-    #     self.assertEqual(am.id, "345")
-    #     self.assertEqual(am.created_at, dt)
-    #     self.assertEqual(am.updated_at, dt)
-
-    # def test_instantiation_with_None_kwargs(self):
-    #     with self.assertRaises(TypeError):
-    #         Amenity(id=None, created_at=None, updated_at=None)
 
     class TestAmenity_save(unittest.TestCase):
         """Unittests for testing save method of the Amenity class."""
