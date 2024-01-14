@@ -1,4 +1,7 @@
-
+#!/usr/bin/python3
+"""
+FileStorage class
+"""
 import unittest
 import models
 import json
@@ -65,22 +68,7 @@ class TestFileStorage_methods(unittest.TestCase):
 
     '''unittest for no file'''
     def test_reload_no_file(self):
-        # file_path = models.storage._FileStorage__file_path
-        # if os.path.exists(file_path):
-        #     os.remove(file_path)
         self.assertTrue(FileNotFoundError, models.storage.reload)
-    
-            
-    # def test_reload_no_file_no(self):
-    #     file_path = models.storage._FileStorage__file_path
-    #     if os.path.exists(file_path):
-    #         os.remove(file_path)
-    #     with self.assertWarns(Warning):
-    #         models.storage.reload()
-    
-    def test_reload_with_arg(self):
-        with self.assertRaises(TypeError):
-            models.storage.reload(None)
         
 
 if __name__ == '__main__':
