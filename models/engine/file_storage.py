@@ -49,7 +49,7 @@ class FileStorage:
     def reload(self):
         try:
             with open(FileStorage.__file_path, 'r') as f:
-                if os.path.getsize(self.__file_path) > 0:
+                if os.path.getsize(FileStorage.__file_path) > 0:
                     Current_dict = json.load(f)
                     '''loop through all objects in Current_dict'''
                     for value in Current_dict.values():
