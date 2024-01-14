@@ -54,20 +54,20 @@ class FileStorage:
                     '''loop through all objects in Current_dict'''
                     for value in Current_dict.values():
                         '''extract the class name from object keys as string'''
-                    cls_name = value["__class__"]
-                    '''Remove the "__class__"
-                        key from the dictionary as it'not necessary'''
-                    del value["__class__"]
-                    '''(eval) evaluate cls_name
-                        and save its class object from this class'''
-                    obj_class = eval(cls_name)
-                    '''create new instance using
-                        (**value): unpacking dict value as kwargs'''
-                    '''Then pass them to cls constructor'''
-                    new_instance = obj_class(**value)
-                    '''The new method is called with
-                            the newly created object as an argument to
-                            add it to the __objects dictionary.'''
+                        cls_name = value["__class__"]
+                        '''Remove the "__class__"
+                            key from the dictionary as it'not necessary'''
+                        del value["__class__"]
+                        '''(eval) evaluate cls_name
+                            and save its class object from this class'''
+                        obj_class = eval(cls_name)
+                        '''create new instance using
+                            (**value): unpacking dict value as kwargs'''
+                        '''Then pass them to cls constructor'''
+                        new_instance = obj_class(**value)
+                        '''The new method is called with
+                                the newly created object as an argument to
+                                add it to the __objects dictionary.'''
                     self.new(new_instance)
         except FileNotFoundError:
             return
