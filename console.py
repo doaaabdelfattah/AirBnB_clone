@@ -96,11 +96,11 @@ class HBNBCommand(cmd.Cmd):
         key = "{}.{}".format(class_name, id_isinstance)
         '''get the dictionary of stored objects'''
         objects = storage.all()
-        if key not in objects:
+        if key in objects:
+            print(objects[key])
+        else:
             print("** no instance found **")
             return
-            '''print the value of the key'''
-        print(objects[key])
 
     def do_all(self, arg):
         '''Usage: all <classname> or all '''
