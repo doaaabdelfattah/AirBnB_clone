@@ -47,6 +47,7 @@ class FileStorage:
             json.dump(json_data, f)
 
     def reload(self):
+        '''deserializes the JSON file to __objects'''
         try:
             with open(FileStorage.__file_path, 'r') as f:
                 if os.path.getsize(FileStorage.__file_path) > 0:
