@@ -59,6 +59,7 @@ class TestFileStorage_methods(unittest.TestCase):
 
     '''Unittest for reload()'''
     def test_save_method(self):
+        '''Unittest for reload()'''
         instant = BaseModel()
         models.storage.new(instant)
         models.storage.save()
@@ -68,7 +69,12 @@ class TestFileStorage_methods(unittest.TestCase):
 
     '''unittest for no file'''
     def test_reload_no_file(self):
+        ''' test reload - nofile'''
         self.assertTrue(FileNotFoundError, models.storage.reload)
+        
+    def test_reload_from_nonexistent(self):
+        """ Nothing happens if file does not exist """
+        self.assertEqual(None, models.storage.reload())
 
 
 if __name__ == '__main__':
