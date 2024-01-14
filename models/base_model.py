@@ -37,7 +37,6 @@ class BaseModel:
         else:
             models.storage.new(self)
 
-
     def __str__(self):
         """return string representation of obj"""
         return "[{}] ({}) {}".format(self.__class__.__name__,
