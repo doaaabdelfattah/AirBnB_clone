@@ -69,11 +69,11 @@ class HBNBCommand(cmd.Cmd):
                 print(" class doesn't exist ")
             else:
                 '''create new object'''
-                new_obj = eval(args[0])()
+                new_object = eval(args[0])()
                 '''save new object to json file'''
                 storage.save()
                 '''print its id'''
-                print(f"{new_obj.id}")
+                print(f"{new_object.id}")
 
     def do_show(self, arg):
         '''
@@ -84,20 +84,20 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return
-        class_name = args[0]
-        if class_name not in HBNBCommand.__classes:
+        class_names = args[0]
+        if class_names not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return
         if len(args) == 1:
             print("** instance id missing **")
             return
-        id_isinstance = args[1]
+        id_isins = args[1]
         '''create the key for the dicti stored objects'''
-        key = "{}.{}".format(class_name, id_isinstance)
+        key = "{}.{}".format(class_names, id_isins)
         '''get the dictionary of stored objects'''
-        objects = storage.all()
-        if key in objects:
-            print(objects[key])
+        objcts = storage.all()
+        if key in objcts:
+            print(objcts[key])
         else:
             print("** no instance found **")
             return
@@ -105,7 +105,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         '''Usage: all <classname> or all '''
         args = arg.split()
-        obj_list = []
+        object_list = []
         if args:
             if args[0] not in HBNBCommand.__classes:
                 print("** class doesn't exist **")
@@ -113,11 +113,11 @@ class HBNBCommand(cmd.Cmd):
             else:
                 for value in storage.all().values():
                     if args[0] == value.__class__.__name__:
-                        obj_list.append(value.__str__())
+                        object_list.append(value.__str__())
         else:
             for value in storage.all().values():
-                obj_list.append(value.__str__())
-        print(obj_list)
+                object_list.append(value.__str__())
+        print(object_list)
 
     def do_destroy(self, arg):
         '''Usage: destroy <class name> <id>
@@ -170,11 +170,11 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return
         if len(args) == 4:
-            attribute_value = args[3]
-        if attribute_value.startswith('"') and attribute_value.endswith('"'):
-            attribute_value = attribute_value[1:-1]
+            attribute_values = args[3]
+        if attribute_values.startswith('"') and attribute_values.endswith('"'):
+            attribute_values = attribute_values[1:-1]
 
-        setattr(models.storage.all()[key], args[2], attribute_value)
+        setattr(models.storage.all()[key], args[2], attribute_values)
         models.storage.all()[key].save()
 
 
