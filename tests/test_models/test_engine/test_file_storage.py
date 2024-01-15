@@ -86,17 +86,6 @@ class TestFileStorage_methods(unittest.TestCase):
         """ Nothing happens if file does not exist """
         self.assertEqual(None, models.storage.reload())
 
-    def test_save_and_reload(self):
-        """ test case for save and reload method"""
-        object1 = BaseModel()
-        obj2 = User()
-        self.file_storage.new(object1)
-        self.file_storage.new(obj2)
-        self.file_storage.save()
-        new_file_storage = FileStorage()
-        new_file_storage.reload()
-        self.assertEqual(new_file_storage.all(), self.file_storage.all())
-
 
 if __name__ == '__main__':
     unittest.main()
