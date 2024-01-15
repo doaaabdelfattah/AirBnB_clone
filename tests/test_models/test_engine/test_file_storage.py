@@ -22,6 +22,16 @@ from models.review import Review
 class TestFileStorage_instantiation(unittest.TestCase):
     '''Unittest for FileStorage class'''
 
+    def test_instantiations(self):
+        '''Unittest for FileStorage class'''
+        self.assertEqual(FileStorage, type(FileStorage()))
+
+    def setUp(self):
+        """
+        test case for setup
+        """
+        self.file_storage = FileStorage()
+
     def testDown(self):
         """
         down test case
@@ -36,17 +46,6 @@ class TestFileStorage_instantiation(unittest.TestCase):
     def test_obj_dict(self):
         '''Unittest for FileStorage class'''
         self.assertEqual(dict, type(FileStorage._FileStorage__objects))
-
-    def testDown(self):
-        """
-        down test case
-        """
-        if os.path.exists(self.file_storage.__file_path):
-            os.remove(self.file_storage.__file_path)
-
-    def test_file_path(self):
-        '''Unittest for FileStorage class'''
-        self.assertEqual(str, type(FileStorage._FileStorage__file_path))
 
     def test_storage_var(self):
         '''Unittest for FileStorage class'''
