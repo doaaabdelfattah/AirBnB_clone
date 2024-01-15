@@ -26,6 +26,19 @@ class TestFileStorage_instantiation(unittest.TestCase):
         '''Unittest for FileStorage class'''
         self.assertEqual(FileStorage, type(FileStorage()))
 
+    def setUp(self):
+        """
+        test case for setup
+        """
+        self.file_storage = FileStorage()
+
+    def testDown(self):
+        """
+        down test case
+        """
+        if os.path.exists(self.file_storage.__file_path):
+            os.remove(self.file_storage.__file_path)
+
     def test_file_path(self):
         '''Unittest for FileStorage class'''
         self.assertEqual(str, type(FileStorage._FileStorage__file_path))
@@ -77,6 +90,7 @@ class TestFileStorage_methods(unittest.TestCase):
     def test_reload_from_nonexistent(self):
         """ Nothing happens if file does not exist """
         self.assertEqual(None, models.storage.reload())
+
 
 if __name__ == '__main__':
     unittest.main()
