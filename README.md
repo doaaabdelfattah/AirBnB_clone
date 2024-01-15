@@ -1,4 +1,6 @@
-# Description of the project
+
+![Screenshot 2024-01-15 020847](https://github.com/nadashaban10/AirBnB_clone/assets/122872974/ee4cfe5c-8c4f-4fd1-8c94-129a17fc715c)
+on of the project
 ----------------------------------------
 The Airbnb Clone project aims to replicate the core features of the Airbnb platform,
 providing users with a platform to list their properties for short-term rentals
