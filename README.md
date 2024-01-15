@@ -1,3 +1,7 @@
+
+
+
+
 # Description of the project
 ----------------------------------------
 The Airbnb Clone project aims to replicate the core features of the Airbnb platform,
