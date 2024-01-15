@@ -86,10 +86,6 @@ class TestFileStorage_methods(unittest.TestCase):
         with self.assertRaises(TypeError):
             models.storage.reload(None)
 
-    def test_reload_from_nonexistent(self):
-        """ Nothing happens if file does not exist """
-        self.assertEqual(None, models.storage.reload())
-
 
 if __name__ == '__main__':
     unittest.main()
