@@ -30,6 +30,14 @@ class TestFileStorage_instantiation(unittest.TestCase):
         '''Unittest for FileStorage class'''
         self.assertEqual(str, type(FileStorage._FileStorage__file_path))
 
+    def test_instantiations(self):
+        '''Unittest for FileStorage class'''
+        self.assertEqual(FileStorage, type(FileStorage()))
+
+    def test_file_path(self):
+        '''Unittest for FileStorage class'''
+        self.assertEqual(str, type(FileStorage._FileStorage__file_path))
+
     def test_obj_dict(self):
         '''Unittest for FileStorage class'''
         self.assertEqual(dict, type(FileStorage._FileStorage__objects))
