@@ -13,8 +13,6 @@ from time import sleep
 from models.place import Place
 from models.engine.file_storage import FileStorage
 
-# ============ test instantiation ===============
-
 
 class TestPlace_instantiation(unittest.TestCase):
     '''Unittest for User class'''
@@ -22,7 +20,8 @@ class TestPlace_instantiation(unittest.TestCase):
     def test_instantiations(self):
         self.assertEqual(Place, type(Place()))
 
-    # test for attributes
+    '''test for attributes'''
+
     def test_att_type(self):
         instant = Place()
         self.assertEqual(str, type(instant.name))
@@ -47,7 +46,9 @@ class TestPlace_instantiation(unittest.TestCase):
         self.assertNotEqual(id1.id, id2.id)
 
 
-# ============ test to_dict ===============
+'''======== test to_dict ========='''
+
+
 class TestPlace_to_dict(unittest.TestCase):
     '''Unittest for User class'''
 
