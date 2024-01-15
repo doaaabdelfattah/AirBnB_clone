@@ -78,13 +78,13 @@ class TestFileStorage_methods(unittest.TestCase):
         self.assertIn("BaseModel." + instant.id,
                       FileStorage._FileStorage__objects)
 
-    def test_reload_no_file(self):
-        ''' test reload - nofile'''
-        self.assertTrue(FileNotFoundError, models.storage.reload)
-
     def test_reload_with_arg(self):
         with self.assertRaises(TypeError):
             models.storage.reload(None)
+
+    def test_reload_from_nonexistent(self):
+        """ Nothing happens if file does not exist """
+        self.assertEqual(None, models.storage.reload())
 
 
 if __name__ == '__main__':
