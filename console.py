@@ -63,10 +63,10 @@ class HBNBCommand(cmd.Cmd):
         '''Split the arguments to a list'''
         args = arg.split()
         if not arg:
-            print(" class name missing ")
+            print("** class name missing **")
         else:
             if args[0] not in HBNBCommand.__classes:
-                print(" class doesn't exist ")
+                print("** class doesn't exist **")
             else:
                 '''create new object'''
                 new_object = eval(args[0])()
