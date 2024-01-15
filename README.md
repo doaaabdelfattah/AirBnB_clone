@@ -1,7 +1,4 @@
 
-<<<<<<< HEAD
-
-
 
 # Description of the project
 =======
