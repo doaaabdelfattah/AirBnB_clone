@@ -166,23 +166,36 @@ class HBNBCommand(cmd.Cmd):
                            "show": self.do_show,
                            "destroy": self.do_destroy,
                            "update": self.do_update}
-                '''Use a regular expression to match the
-                command and the parameters'''
+                '''Use a regular expression to match
+                    the command and the parameters'''
                 matches = re.match(r'(\w+)\((.*)\)', args[1])
                 if matches:
-                    ''' Get the command and the parameters
-                    from the match object'''
+                    '''Get the command and
+                    the parameters from the match object'''
                     command, parameters = matches.groups()
-                    '''Use the dict.get() method to get the method
-                    for the command, or None'''
+                    ''' Use the dict.get() method
+                    to get the method for the command, or None'''
                     method = methods.get(command)
                     if method:
-                        ''' Use another regular expression to remove the "
-                        charas from the parameters'''
+                        ''' Use another regular expression to remove the
+                         " charas from the parameters'''
                         parameters = re.sub(r'"', '', parameters)
                         '''Call the method with the class name
                         and the parameters as the argument'''
                         method(args[0] + " " + parameters)
+                    elif args[1].startswith("update("):
+                        args[1] = re.sub(r'update\(|\)|"', '', args[1])
+                        if "," in args[1]:
+                            args[1] = args[1].split(",")
+                        if len(args[1]) == 4:
+                            instance_id = args[1][0]
+                            attribute_name = args[1][1]
+                            attribute_value = args[1][2]
+                            self.do_update(args[0], instance_id,
+                                           attribute_name, attribute_value)
+                        else:
+                            '''The command is not valid'''
+                            cmd.Cmd.default(self, arg)
                     else:
                         '''The command is not valid'''
                         cmd.Cmd.default(self, arg)
