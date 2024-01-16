@@ -166,11 +166,11 @@ class HBNBCommand(cmd.Cmd):
                            "show": self.do_show,
                            "destroy": self.do_destroy,
                            "update": self.do_update}
-                '''Use a regular expression to match
+                '''Use a regular expression to match 
                     the command and the parameters'''
                 matches = re.match(r'(\w+)\((.*)\)', args[1])
                 if matches:
-                    '''Get the command and
+                    '''Get the command and 
                     the parameters from the match object'''
                     command, parameters = matches.groups()
                     ''' Use the dict.get() method
