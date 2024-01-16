@@ -3,6 +3,7 @@
 Custom class for cli program
 """
 import cmd
+import re
 import sys
 import models
 from models import storage
@@ -55,6 +56,15 @@ class HBNBCommand(cmd.Cmd):
         """ Eliminates empty lines
         """
         pass
+
+    def do_count(self, arg):
+        '''Usage: count <class name> or count'''
+        args = arg.split()
+        counts = 0
+        for objcts in models.storage.all().values():
+            if objcts.__class__.__name__ == args[0]:
+                counts += 1
+        print(counts)
 
     def do_create(self, arg):
         ''' Usage: create <class>
@@ -144,6 +154,47 @@ class HBNBCommand(cmd.Cmd):
                     return
                 '''if not found'''
             print("** no instance found **")
+
+    def default(self, arg):
+        '''Usage: <class name>.<command>(<parameters>)'''
+        args = arg.split(".")
+        if len(args) == 2:
+            if args[0] in HBNBCommand.__classes:
+                '''Use a dictionary to map commands to methods'''
+                methods = {"all": self.do_all,
+                           "count": self.do_count,
+                           "show": self.do_show,
+                           "destroy": self.do_destroy,
+                           "update": self.do_update}
+                '''Use a regular expression to match the
+                command and the parameters'''
+                matches = re.match(r'(\w+)\((.*)\)', args[1])
+                if matches:
+                    ''' Get the command and the parameters
+                    from the match object'''
+                    command, parameters = matches.groups()
+                    '''Use the dict.get() method to get the method
+                    for the command, or None'''
+                    method = methods.get(command)
+                    if method:
+                        ''' Use another regular expression to remove the "
+                        charas from the parameters'''
+                        parameters = re.sub(r'"', '', parameters)
+                        '''Call the method with the class name
+                        and the parameters as the argument'''
+                        method(args[0] + " " + parameters)
+                    else:
+                        '''The command is not valid'''
+                        cmd.Cmd.default(self, arg)
+                else:
+                    '''The command is not in the expected format'''
+                    cmd.Cmd.default(self, arg)
+            else:
+                '''The class name is not valid'''
+                cmd.Cmd.default(self, arg)
+        else:
+            '''The arg is not in the expected format'''
+            cmd.Cmd.default(self, arg)
 
     def do_update(self, arg):
         '''Usage: update <class name> <id> <attribute name> "<attribute value>"
